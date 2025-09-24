@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        #current-image {
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <img id="current-image" src="imagens/imagem1.jpg" alt="Imagem">
+    
+    <script>
+        const images = ['imagens/imagem1.jpg', 'imagens/imagem2.jpg'];
+        let currentIndex = 0;
+        const imageElement = document.getElementById('current-image');
+        
+        function changeImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            imageElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                imageElement.src = images[currentIndex];
+                imageElement.style.opacity = 1;
+            }, 500);
+        }
+        
+        // Alterna a cada 10 segundos
+        setInterval(changeImage, 10000);
+        
+        // Transição suave no carregamento
+        imageElement.style.opacity = 1;
+        
+        // Redimensiona quando a janela mudar de tamanho
+        window.addEventListener('resize', function() {
+            imageElement.style.width = '100vw';
+            imageElement.style.height = '100vh';
+        });
+    </script>
+</body>
+</html>
